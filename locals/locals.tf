@@ -12,16 +12,29 @@ locals {
       default_name    = "dev"
       super_long_name = "dkgjdsklgjlsdkjgklsdjgkldsjglksdjgklsdjlkgsdjlkgjsdklgjlksdjglksdjgklsdjgklsdjklgjsdklgjklsdjglksdjglksdjgljriowjoituger90s 9sdug90dsug9usd90gusd90 gu90sd u90ud890s7g 8 ugiugjipoujgi ujiogj iojh iohj oihjg oi"
 
-      members = [for target in tolist(["read", "write"]) : "hello-${target}"]
-
+      members       = [for target in tolist(["read", "write"]) : "hello-${target}"]
+      members_again = join(",", [for target in tolist(["read", "write"]) : "\"hello-${target}\""])
       names = [
         { name = "test1" },
         { name = "test2" },
         { name = "test3" },
         { noname = "test4" },
       ]
+
+      source_destination_list = flatten([
+        for src in ["a", "b", "c"] : [
+          for dest in ["a", "b", "c"] : {
+            src  = src
+            dest = dest
+          }
+        ]
+      ])
     }
   }
 
   workspace = local.env[terraform.workspace]
+}
+
+locals {
+
 }
