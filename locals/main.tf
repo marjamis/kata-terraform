@@ -18,7 +18,7 @@ resource "docker_container" "loop_through_string_set" {
 }
 
 resource "docker_container" "loop_through_string_set_to_array" {
-  image = docker_image.nginx.id
+  image = data.docker_image.custom.name
   name  = "${local.default_name}-loop_through_string_set_to_array"
   command = [
     "test",
